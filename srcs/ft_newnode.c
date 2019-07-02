@@ -1,29 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_ls.h                                            :+:      :+:    :+:   */
+/*   ft_newnode.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 10:53:27 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/02 10:13:22 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/07/02 10:48:31 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef FT_LS_H
-# define FT_LS_H
-# include "../libft/libft.h"
+#include "../incl/ft_ls.h"
 
-typedef struct      s_file
+t_file  *ft_newnode(char *file_name, struct dirent *de)
 {
-    char            *file_name;
-    struct dirent   *de;
-    struct s_file   *next;
-    struct s_file   *previous;
-}                   t_file;
+    t_file     *new;
 
-t_file  *ft_newnode(char *file_name, struct dirent *de);
-void    ft_addnode(t_file *node, char *file_name, struct dirent *de);
-void    ft_sortlist(t_file *list);
-
-#endif
+    new = mallock(sizeof(t_file));
+    new->file_name = ft_strdup(file_name);
+    new->de = de;
+    new->next = NULL;
+    new->previous = NULL;
+    return(new);
+}
