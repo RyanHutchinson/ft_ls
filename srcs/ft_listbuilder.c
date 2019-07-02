@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 14:28:59 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:32:46 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,3 +41,5 @@ t_file   *ft_listbuilder(t_flags flags)
     closedir(dr);
     return(file_list_head);
 }
+
+//      if(flags.flags & 1)

@@ -6,25 +6,39 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:14:25 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 14:15:03 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:45:00 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
- static t_flags  ft_flagchecker(char *flags)
- {
-    t_flags new;
+ unsigned char		ft_flagchecker(char **av, int ac)
+{
+	int				i;
+	char			**str;
+	unsigned char	flags;
 
-    if((flags[1] || flags[2] || flags [3])  == 'l')
-        new.l = 1;
-    if((flags[1] || flags[2] || flags [3])  == 'a')
-        new.a = 1;
-    if((flags[1] || flags[2] || flags [3])  == 'r')
-        new.r = 1;
-    if((flags[1] || flags[2] || flags [3])  == 'R')
-        new.R = 1;
-    if((flags[1] || flags[2] || flags [3])  == 't')
-        new.t = 1;
-    return(new);
- }
+	flags = 0;
+	i = 1;
+	while (i < ac)
+	{
+		str = &av[i];
+		while (**str == 'l' || **str == 'a' || **str == 'R' ||
+			**str == 'r' || **str == 't' || **str == ' ' || **str == '-')
+		{
+			if (**str == 'l')
+				flags |= 1;
+			if (**str == 'a')
+				flags |= 2;
+			if (**str == 'R')
+				flags |= 4;
+			if (**str == 'r')
+				flags |= 8;
+			if (**str == 't')
+				flags |= 16;
+			(*str)++;
+		}
+		i++;
+	}
+	return (flags);
+}

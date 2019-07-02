@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:25:30 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 14:25:56 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/02 15:07:29 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,6 +19,6 @@ int main (int ac, char **av)
             printf("how?!?!?!?!?\n");
             return (0);
         }
-    ft_ls(av[1]);
+    ft_ls(ac, av);
     return (0);    
 }
