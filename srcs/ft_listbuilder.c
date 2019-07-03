@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/03 09:38:38 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/03 14:35:06 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,15 +27,23 @@ t_file   *ft_listbuilder(t_flags flags, t_file *head)
  //       lstat(de->d_name, &file_info);
         if(flags.flags & 1)
         {
+            
+        }
+        else
+        {
             ft_addnode(scanner, de->d_name);
             scanner = scanner->next;
         }
+        
         // if (file_info.st_mode == S_IFDIR)//------------------------------------ Do the stuff
         //     {
         //     printf("There is a head\n");
         //     }
 
     }
+    printf("||----Got into sortlist---||\n");//----------------------------------------remember to kill
+    ft_sortlist(head);
+    printf("||----Got outta sortlist--||\n");
     closedir(dr);
     return(head);
 }
