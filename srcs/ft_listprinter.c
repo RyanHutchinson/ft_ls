@@ -6,13 +6,20 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 14:30:44 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/03 09:34:10 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-void    ft_listprinter(t_file *file_list_head)
+void    ft_listprinter(t_file *head)
 {
-    // god damn this is going to be a fun think.
+    t_file  *scanner;
+
+    scanner = head->next;
+    while(scanner != NULL)
+        {
+            printf("%s ", scanner->file_name);
+            scanner = scanner->next;
+        }
 }

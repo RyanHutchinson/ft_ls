@@ -6,13 +6,13 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/01 09:21:10 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/03 08:35:57 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME =	ft_ls.a
 
-SRC =	ft_ls.c
+SRC =	./srcs/*.c
 
 OBJ = *.o
 
@@ -24,7 +24,8 @@ $(NAME):
 	gcc -c -Wall -Werror -Wextra $(SRC)
 	ar rv $(NAME) $(OBJ) $(INCL)
 	ranlib $(NAME)
-	gcc -Wall -Werror -Wextra ft_ls.c $(NAME) $(INCL) -I./libft
+	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
+	mv *.o ./srcs
 	mv a.out test
 
 clean:

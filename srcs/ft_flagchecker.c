@@ -6,13 +6,13 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:14:25 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 15:45:00 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/03 08:30:09 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
- unsigned char		ft_flagchecker(char **av, int ac)
+ unsigned char		ft_flagchecker(int ac, char **av)
 {
 	int				i;
 	char			**str;
