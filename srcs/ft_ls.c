@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/04 13:46:48 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/04 16:01:33 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,12 +16,10 @@ void    ft_ls(int ac, char **av)
 {
     t_file  *head = ft_newnode();
     t_flags flags;
+    size_t     minwidth;
+    DIR *dr = opendir(".");  //------------------------------------------------ returns a DIR pointer.
 
     flags.flags = ft_flagchecker(ac, av);
-    printf("\n\n||----Got into builder----||\n");//------------------------------remember to kill   
-    ft_listbuilder(flags, head);
-    printf("||----Got outta builder---||\n");//------------------------------remember to kill
-    printf("||----Got into printer----||\n\n");//------------------------------remember to kill
-    ft_listprinter(head);
-    printf("\n||----Got outta printer---||\n");//------------------------------remember to kill
+    minwidth = ft_listbuilder(flags, head, dr);
+    ft_listprinter(head, minwidth);
 }

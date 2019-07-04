@@ -6,54 +6,63 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/04 13:51:46 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/04 16:03:28 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-t_file   *ft_listbuilder(t_flags flags, t_file *head)
+size_t   ft_listbuilder(t_flags flags, t_file *head, DIR *dr)
 {
-    struct dirent *de;  //----------------------------------------------------- Pointer to the struct which will store the filename.
- //   struct stat file_info; //-------------------------------------------------- Making a struct which stores the current files stats (user, time, type, permissions etc.)
-
-    DIR *dr = opendir(".");  //------------------------------------------------ returns a DIR pointer.
-    t_file  *scanner = head;
+    struct dirent   *de;  //----------------------------------------------------- Pointer to the struct which will store the filename.
+    struct stat     stats; //------------------------------------------------------ Making a struct which stores the current files stats (user, time, type, permissions etc.)
+    t_file          *scanner = head;
+    size_t          minwidth = 0;
 
     if (dr == NULL) //--------------------------------------------------------- Breaks when nothing 
         printf("The bad has happened -_- you are nowhere\n" ); 
     while ((de = readdir(dr)) != NULL) 
     {
- //       lstat(de->d_name, &file_info);
+        lstat(de->d_name, &stats);
         if(flags.flags & 1)
         {
-            
+            //Make a ft_statsprinter()
         }
         else if(de->d_name[0] == '.' && !(flags.flags & 2))
         {
             continue;
         }
+        else if((flags.flags & 4) && S_ISDIR(stats.st_mode))
+        {
+            printf("found a dir\n");
+            ft_addnode(scanner, de->d_name);
+            scanner = scanner->next;
+
+            if(strlen(de->d_name) > minwidth)
+            minwidth = strlen(de->d_name);
+
+            // DIR *drr = opendir("");
+            //ft_listbuilder(flags, some head , drr);
+        }
         else
         {
             ft_addnode(scanner, de->d_name);
             scanner = scanner->next;
-        }
-        
-        // if (file_info.st_mode == S_IFDIR)//---------------------------------- Do the stuff
-        //     {
-        //     printf("There is a head\n");
-        //     }
 
+            if(strlen(de->d_name) > minwidth)
+            minwidth = strlen(de->d_name);
+        }
     }
-    printf("||----Got into sortlist---||\n");//-------------------------------- remember to kill
     ft_sortlist(head);
-    printf("||----Got outta sortlist--||\n");//-------------------------------- remember to kill
+    /*------------------------------------------------------------------------------------------*/  printf("");//-so ya... this printf keeps everything together somehow? Don't delete
     if(flags.flags & 8)
     {
         ft_revlist(head);
     }
+    if(flags.flags & 16)
+    {
+        //make a listtimesort
+    }
     closedir(dr);
-    return(head);
+    return(minwidth + 1);
 }
-
-//      if(flags.flags & 1)
