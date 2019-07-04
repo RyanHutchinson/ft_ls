@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_sortlist.c                                      :+:      :+:    :+:   */
+/*   ft_revlist.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:33:23 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/04 13:44:03 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/04 13:48:41 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,7 +23,7 @@
 // ********************************************************************************
 
 
-void    ft_sortlist(t_file *head)
+void    ft_revlist(t_file *head)
 {
 	t_file	*scan1;
 	t_file	*scan2;
@@ -38,7 +38,7 @@ void    ft_sortlist(t_file *head)
 		scan2 = scan1->next;
 		if(scan2 == NULL)
 			break;
-		if((i = strcmp(scan1->file_name, scan2->file_name)) > 0)
+		if((i = strcmp(scan1->file_name, scan2->file_name)) < 0)
 		{
 			if (scan1->previous)
 				scan1->previous->next = scan2;

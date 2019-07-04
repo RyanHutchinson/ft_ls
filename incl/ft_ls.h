@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/03 10:49:02 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/04 13:47:31 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,5 +43,6 @@ void		    ft_listprinter(t_file *head);
 t_file		    *ft_newnode();
 void		    ft_addnode(t_file *node, char *file_name);
 void		    ft_sortlist(t_file *head);
+void            ft_revlist(t_file *head);
 
 #endif

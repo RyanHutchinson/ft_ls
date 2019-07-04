@@ -6,7 +6,7 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/03 10:50:10 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/04 12:41:09 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -28,7 +28,7 @@ $(NAME):
 	ranlib $(NAME)
 	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
 	mv *.o ./srcs
-	mv a.out test
+	mv a.out ls
 
 clean:
 	rm -f $(OBJ)
