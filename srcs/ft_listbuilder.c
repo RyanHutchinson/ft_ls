@@ -6,14 +6,15 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 11:10:08 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:09:13 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-size_t   ft_listbuilder(t_flags flags, t_file *head, DIR *dr)
+void   ft_listbuilder(t_flags flags, t_file *head, char *open)
 {
+	DIR				*dr = opendir(open);  //------------------------------------------------ returns a DIR pointer.
 	struct dirent   *de;  //----------------------------------------------------- Pointer to the struct which will store the filename.
 	struct stat     stats; //------------------------------------------------------ Making a struct which stores the current files stats (user, time, type, permissions etc.)
 	t_file          *scanner = head;
@@ -28,18 +29,6 @@ size_t   ft_listbuilder(t_flags flags, t_file *head, DIR *dr)
 		{
 			continue;
 		}
-		else if((flags.flags & 4) && S_ISDIR(stats.st_mode))
-		{
-			printf("found a dir\n");
-			ft_addnode(scanner, de->d_name, stats);
-			scanner = scanner->next;
-
-			if(strlen(de->d_name) > minwidth)
-			minwidth = strlen(de->d_name);
-
-			// DIR *drr = opendir("");
-			//ft_listbuilder(flags, some head , drr);
-		}
 		else
 		{
 			ft_addnode(scanner, de->d_name, stats);
@@ -51,14 +40,24 @@ size_t   ft_listbuilder(t_flags flags, t_file *head, DIR *dr)
 	}
 	ft_sortlist(head);
 	/*------------------------------------------------------------------------------------------*/  printf("");//-so ya... this printf keeps everything together somehow? Don't delete
-	if(flags.flags & 8)
-	{
-		ft_revlist(head);
-	}
 	if(flags.flags & 16)
-	{
-		//make a listtimesort
-	}
+		ft_sortlisttime(head);
+	if(flags.flags & 8)
+		ft_revlist(head);
 	closedir(dr);
-	return(minwidth + 1);
+	ft_listprinter(head, (minwidth + 1), flags);
+	if(flags.flags & 4)
+		{
+			scanner = head;
+			while(scanner != NULL)
+			{
+				if(S_ISDIR(stats.st_mode))
+				{
+					char *opennxt = de->d_name;
+					ft_listbuilder(flags,scanner, opennxt);
+				}
+				scanner = scanner->next;
+			}
+
+		}
 }

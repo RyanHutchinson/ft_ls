@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 12:08:18 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:03:37 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,7 +16,7 @@ t_file  *ft_newnode()
 {
     t_file     *new;
 
-    new = (t_file *)malloc(sizeof(t_file));
+    new = malloc(sizeof(t_file));
 	new->attributes = NULL;
     new->file_name = NULL;
     new->links = 0;
@@ -33,25 +33,22 @@ t_file  *ft_newnode()
     return(new);
 }
 
-int    ft_addnode(t_file *node, char *file_name, struct stat stats)
+void    ft_addnode(t_file *node, char *file_name, struct stat stats)
 {
 	t_file  *new;
 
-	if (!(new = malloc(sizeof(t_file))))
-		return (0);
-	
+	new = malloc(sizeof(t_file));
 	new->attributes = ft_convertAtt(stats);
 	new->file_name = file_name;
 	new->links = stats.st_nlink;
 	new->userID = ft_convertUID(stats);
 	new->groupID = ft_convertGID(stats);
 	new->size = stats.st_size;
-	new->rawtime = stats.st_mtimespec.tv_sec;
+	new->rawtime = stats.st_mtime;
 	ft_convertTime(new);
 	new->next = NULL;
 	new->previous = node;
 	node->next = new;
-	return(1);
 }
 
 void    ft_sortlist(t_file *head)
@@ -107,6 +104,42 @@ void    ft_revlist(t_file *head)
 		if(scan2 == NULL)
 			break;
 		if((i = strcmp(scan1->file_name, scan2->file_name)) < 0)
+		{
+			if (scan1->previous)
+				scan1->previous->next = scan2;
+			scan2->previous = scan1->previous;
+			if (scan2->next)
+				scan2->next->previous = scan1;
+			scan1->next = scan2->next;
+			scan1->previous = scan2;
+			scan2->next = scan1;
+			temp = scan1;
+			scan1 = scan2;
+			scan2 = temp;
+			scanner = head->next;
+		}
+		else
+		{
+			scanner = scanner->next;
+		}
+	}
+}
+
+void    ft_sortlisttime(t_file *head)
+{
+	t_file	*scan1;
+	t_file	*scan2;
+	t_file	*scanner;
+	t_file	*temp;
+
+	scanner = head->next;
+	while(scanner != NULL)
+	{
+		scan1 = scanner;
+		scan2 = scan1->next;
+		if(scan2 == NULL)
+			break;
+		if(scan1->rawtime < scan2->rawtime)
 		{
 			if (scan1->previous)
 				scan1->previous->next = scan2;

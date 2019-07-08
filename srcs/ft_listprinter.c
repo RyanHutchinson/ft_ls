@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 12:11:40 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/08 12:54:16 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,8 +22,8 @@ void    ft_listprinter(t_file *head, size_t minwidth, t_flags flags)
 			{
 				printf("%s ", scanner->attributes);
 				printf("%3d ", scanner->links);
-				printf("%s ", scanner->userID);
-				printf("%s   ", scanner->groupID);
+				printf("%s  ", scanner->userID);
+				printf("%s  ", scanner->groupID);
 				printf("%5d ", scanner->size);
 				printf("%2s ", scanner->day);
 				printf("%s ", scanner->month);

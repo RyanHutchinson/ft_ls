@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 11:09:19 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:07:19 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,12 +14,9 @@
 
 void    ft_ls(int ac, char **av)
 {
-	t_file  *head = ft_newnode();
-	t_flags flags;
-	size_t     minwidth;
-	DIR *dr = opendir(".");  //------------------------------------------------ returns a DIR pointer.
+	t_file  	*head = ft_newnode();
+	t_flags 	flags;
 
 	flags.flags = ft_flagchecker(ac, av);
-	minwidth = ft_listbuilder(flags, head, dr);
-	ft_listprinter(head, minwidth, flags);
+	ft_listbuilder(flags, head, ".");
 }

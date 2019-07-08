@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 12:07:57 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/08 16:08:56 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -48,14 +48,16 @@ typedef	struct		s_flags
 
 void		    ft_ls(int ac, char **av);
 
-size_t 		    ft_listbuilder(t_flags flags, t_file *head, DIR *dr);
+void 		    ft_listbuilder(t_flags flags, t_file *head, char *open);
 unsigned char	ft_flagchecker(int ac, char **av);
 void		    ft_listprinter(t_file *head, size_t minwidth, t_flags flags);
 
 t_file		    *ft_newnode();
-int			    ft_addnode(t_file *node, char *file_name, struct stat stats);
+void		    ft_addnode(t_file *node, char *file_name, struct stat stats);
 void		    ft_sortlist(t_file *head);
 void            ft_revlist(t_file *head);
+void	   		ft_sortlisttime(t_file *head);
+
 char			*ft_convertUID(struct stat stats);
 char			*ft_convertGID(struct stat stats);
 void			ft_convertTime(t_file *node);
