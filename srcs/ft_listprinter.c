@@ -6,19 +6,19 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 12:54:16 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/09 13:33:38 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-void    ft_listprinter(t_file *head, size_t minwidth, t_flags flags)
+void    ft_listprinter(t_file *head, size_t minwidth, int flags)
 {
 	t_file  *scanner;
 	scanner = head->next;
 	while(scanner != NULL)
 		{
-			if(flags.flags & 1)
+			if(flags & 1)
 			{
 				printf("%s ", scanner->attributes);
 				printf("%3d ", scanner->links);
@@ -37,6 +37,6 @@ void    ft_listprinter(t_file *head, size_t minwidth, t_flags flags)
 				scanner = scanner->next;
 			}
 		}
-	if(!(flags.flags & 1))
+	if(!(flags & 1))
 		printf("\n");
 }

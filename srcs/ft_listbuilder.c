@@ -6,15 +6,16 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 16:09:13 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:13:08 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-void   ft_listbuilder(t_flags flags, t_file *head, char *open)
+void   ft_listbuilder(int flags, char *path)
 {
-	DIR				*dr = opendir(open);  //------------------------------------------------ returns a DIR pointer.
+	DIR				*dr = opendir(path);  //------------------------------------------------ returns a DIR pointer.
+	t_file  		*head = ft_newnode();
 	struct dirent   *de;  //----------------------------------------------------- Pointer to the struct which will store the filename.
 	struct stat     stats; //------------------------------------------------------ Making a struct which stores the current files stats (user, time, type, permissions etc.)
 	t_file          *scanner = head;
@@ -24,8 +25,9 @@ void   ft_listbuilder(t_flags flags, t_file *head, char *open)
 		printf("The bad has happened -_- you are nowhere\n" ); 
 	while ((de = readdir(dr)) != NULL) 
 	{
-		lstat(de->d_name, &stats);
-		if(de->d_name[0] == '.' && !(flags.flags & 2))
+		char *tmp = ft_strjoin(path, "/");//-------------------------fix this placement bullshit
+		lstat(ft_strjoin(tmp, de->d_name), &stats);
+		if(de->d_name[0] == '.' && !(flags & 2))
 		{
 			continue;
 		}
@@ -39,25 +41,29 @@ void   ft_listbuilder(t_flags flags, t_file *head, char *open)
 		}
 	}
 	ft_sortlist(head);
-	/*------------------------------------------------------------------------------------------*/  printf("");//-so ya... this printf keeps everything together somehow? Don't delete
-	if(flags.flags & 16)
+	/*------------------------------------------------------------------------------------------*///  printf("");//-so ya... this printf keeps everything together somehow? Don't delete
+	if(flags & 16)
 		ft_sortlisttime(head);
-	if(flags.flags & 8)
+	if(flags & 8)
 		ft_revlist(head);
-	closedir(dr);
 	ft_listprinter(head, (minwidth + 1), flags);
-	if(flags.flags & 4)
+	if(flags & 4)
 		{
-			scanner = head;
+			scanner = head->next;
 			while(scanner != NULL)
 			{
-				if(S_ISDIR(stats.st_mode))
+				if(scanner->file_name[0] == '.')
 				{
-					char *opennxt = de->d_name;
-					ft_listbuilder(flags,scanner, opennxt);
+					continue;
+				}
+				else if(scanner->attributes[0] == 'd')
+				{
+					printf("\n./%s:\n\n", scanner->file_name);
+					ft_listbuilder(flags, scanner->file_name);
 				}
 				scanner = scanner->next;
 			}
-
 		}
+		ft_dellist(head);
+		closedir(dr);
 }

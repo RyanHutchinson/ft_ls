@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 16:08:56 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:58:36 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,22 +41,28 @@ typedef	struct		s_file
 	struct s_file	*previous;
 }                   t_file;
 
-typedef	struct		s_flags
+typedef	struct		s_dirs
 {
-	unsigned char   flags;
-}                   t_flags;
+	char   			*dirname;
+	struct s_dirs	*next;
+}                   t_dirs;
 
 void		    ft_ls(int ac, char **av);
 
-void 		    ft_listbuilder(t_flags flags, t_file *head, char *open);
-unsigned char	ft_flagchecker(int ac, char **av);
-void		    ft_listprinter(t_file *head, size_t minwidth, t_flags flags);
+void 		    ft_listbuilder(int flags, char *path);
+int				ft_flagchecker(int ac, char **av, t_dirs *dirs, int *flags, char *path);
+void		    ft_listprinter(t_file *head, size_t minwidth, int flags);
+
+void			ft_adddir(char *path, t_dirs *dirs);
+t_dirs			*ft_newdirs(char *path);
+void			ft_dirsdel(t_dirs *dirs);
 
 t_file		    *ft_newnode();
 void		    ft_addnode(t_file *node, char *file_name, struct stat stats);
 void		    ft_sortlist(t_file *head);
 void            ft_revlist(t_file *head);
 void	   		ft_sortlisttime(t_file *head);
+void			ft_dellist(t_file *head);
 
 char			*ft_convertUID(struct stat stats);
 char			*ft_convertGID(struct stat stats);

@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 16:07:19 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/09 16:16:11 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,9 +14,18 @@
 
 void    ft_ls(int ac, char **av)
 {
-	t_file  	*head = ft_newnode();
-	t_flags 	flags;
+	t_dirs	*dirs = NULL;
+	int 	flags = 0;
+	char	*path = "./";
+	int i;
 
-	flags.flags = ft_flagchecker(ac, av);
-	ft_listbuilder(flags, head, ".");
+	i = ft_flagchecker(ac, av, dirs, &flags, path);
+	if(dirs!= NULL)
+		while(dirs != NULL)
+		{
+			ft_listbuilder(flags, path);
+		}
+	else
+		ft_listbuilder(flags, path);
+	printf("%d\n", i);
 }

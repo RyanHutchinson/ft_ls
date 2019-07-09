@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/08 16:03:37 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/09 15:58:44 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,7 +39,7 @@ void    ft_addnode(t_file *node, char *file_name, struct stat stats)
 
 	new = malloc(sizeof(t_file));
 	new->attributes = ft_convertAtt(stats);
-	new->file_name = file_name;
+	new->file_name = ft_strdup(file_name);
 	new->links = stats.st_nlink;
 	new->userID = ft_convertUID(stats);
 	new->groupID = ft_convertGID(stats);
@@ -49,6 +49,30 @@ void    ft_addnode(t_file *node, char *file_name, struct stat stats)
 	new->next = NULL;
 	new->previous = node;
 	node->next = new;
+}
+
+void	ft_dellist(t_file *head)
+{
+	t_file	*scanner = head;
+	t_file	*tmp;
+
+	while(scanner != NULL)
+	{
+		tmp = scanner->next;
+		ft_strdel(&scanner->attributes);
+		ft_strdel(&scanner->file_name);
+		scanner->links = 0;
+		ft_strdel(&scanner->userID);
+		ft_strdel(&scanner->groupID);
+		scanner->time = 0;
+		ft_strdel(&scanner->day);
+		ft_strdel(&scanner->month);
+		ft_strdel(&scanner->year);
+		ft_strdel(&scanner->time);
+		scanner->previous = NULL;
+		scanner->next = NULL;
+		scanner = tmp;
+	}
 }
 
 void    ft_sortlist(t_file *head)
@@ -139,7 +163,7 @@ void    ft_sortlisttime(t_file *head)
 		scan2 = scan1->next;
 		if(scan2 == NULL)
 			break;
-		if(scan1->rawtime < scan2->rawtime)
+		if(difftime(scan1->rawtime,scan2->rawtime) > 0)
 		{
 			if (scan1->previous)
 				scan1->previous->next = scan2;
