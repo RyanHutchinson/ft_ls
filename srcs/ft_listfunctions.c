@@ -6,36 +6,15 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/10 13:08:25 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:30:11 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-t_file  *ft_newnode()
+t_file  *ft_newnode(char *file_name, struct stat stats)
 {
     t_file     *new;
-
-    new = malloc(sizeof(t_file));
-	new->attributes = NULL;
-    new->file_name = NULL;
-    new->links = 0;
-    new->userID = NULL;
-    new->groupID = NULL;
-	new->size = 0;
-    new->rawtime = 0;
-	new->day = NULL;
-	new->month = NULL;
-	new->year = NULL;
-	new->time = NULL;
-    new->next = NULL;
-    new->previous = NULL;
-    return(new);
-}
-
-void    ft_addnode(t_file *node, char *file_name, struct stat stats)
-{
-	t_file  *new;
 
 	new = malloc(sizeof(t_file));
 	new->attributes = ft_convertAtt(stats);
@@ -47,8 +26,29 @@ void    ft_addnode(t_file *node, char *file_name, struct stat stats)
 	new->rawtime = stats.st_mtime;
 	ft_convertTime(new);
 	new->next = NULL;
-	new->previous = node;
-	node->next = new;
+	new->previous = NULL;
+	return (new);
+}
+
+t_file    *ft_addnode(t_file *head, char *file_name, struct stat stats)
+{
+	t_file	*scanner;
+	t_file	*tmp;
+
+	if(head == NULL)
+		head = ft_newnode(file_name, stats);
+	else
+	{
+		scanner = head;
+		while(scanner != NULL)
+		{
+			tmp = scanner;
+			scanner = scanner->next;
+		}
+		tmp->next = ft_newnode(file_name, stats);
+		tmp->next->previous = tmp;
+	}
+	return (head);
 }
 
 void	ft_dellist(t_file *head)

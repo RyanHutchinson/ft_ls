@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/10 13:12:06 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/10 14:02:11 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,11 +27,11 @@ void	ft_ls(int ac, char **av)
 		while (dirs != NULL)
 		{
 			printf("%s:\n", dirs->dirname);
-			ft_listbuilder(flags, ft_strjoin(path, dirs->dirname));
+			ft_lsengine(flags, ft_strjoin(path, dirs->dirname));
 			printf("\n");
 			dirs = dirs->next;
 		}
 	}
 	else
-		ft_listbuilder(flags, ".");
+		ft_lsengine(flags, ".");
 }
