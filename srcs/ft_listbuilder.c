@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/09 16:13:08 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/10 13:14:18 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,7 @@
 
 void   ft_listbuilder(int flags, char *path)
 {
+	printf("%s\n", path);
 	DIR				*dr = opendir(path);  //------------------------------------------------ returns a DIR pointer.
 	t_file  		*head = ft_newnode();
 	struct dirent   *de;  //----------------------------------------------------- Pointer to the struct which will store the filename.
@@ -27,7 +28,7 @@ void   ft_listbuilder(int flags, char *path)
 	{
 		char *tmp = ft_strjoin(path, "/");//-------------------------fix this placement bullshit
 		lstat(ft_strjoin(tmp, de->d_name), &stats);
-		if(de->d_name[0] == '.' && !(flags & 2))
+		if(de->d_name[0] == '.' && !(flags & FLAG_A))
 		{
 			continue;
 		}
@@ -41,25 +42,26 @@ void   ft_listbuilder(int flags, char *path)
 		}
 	}
 	ft_sortlist(head);
-	/*------------------------------------------------------------------------------------------*///  printf("");//-so ya... this printf keeps everything together somehow? Don't delete
-	if(flags & 16)
+	if(flags & FLAG_T)
 		ft_sortlisttime(head);
-	if(flags & 8)
+	if(flags & FLAG_R)
 		ft_revlist(head);
 	ft_listprinter(head, (minwidth + 1), flags);
-	if(flags & 4)
+	if(flags & FLAG_RECURSE)
 		{
 			scanner = head->next;
 			while(scanner != NULL)
 			{
-				if(scanner->file_name[0] == '.')
-				{
-					continue;
-				}
-				else if(scanner->attributes[0] == 'd')
+				if(scanner->attributes[0] == 'd' && !ft_strequ(scanner->file_name, ".") &&
+				!ft_strequ(scanner->file_name, ".."))
 				{
 					printf("\n./%s:\n\n", scanner->file_name);
-					ft_listbuilder(flags, scanner->file_name);
+					char *str = ft_strjoin(path, "/");
+					char *str1 = ft_strjoin(str, scanner->file_name);
+					ft_listbuilder(flags, str1);
+					free(str);
+					free(str1);
+
 				}
 				scanner = scanner->next;
 			}

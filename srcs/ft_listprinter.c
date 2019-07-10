@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/09 13:33:38 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/10 11:42:15 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,7 @@ void    ft_listprinter(t_file *head, size_t minwidth, int flags)
 	scanner = head->next;
 	while(scanner != NULL)
 		{
-			if(flags & 1)
+			if(flags & FLAG_L)
 			{
 				printf("%s ", scanner->attributes);
 				printf("%3d ", scanner->links);
@@ -37,6 +37,6 @@ void    ft_listprinter(t_file *head, size_t minwidth, int flags)
 				scanner = scanner->next;
 			}
 		}
-	if(!(flags & 1))
+	if(!(flags & FLAG_L))
 		printf("\n");
 }

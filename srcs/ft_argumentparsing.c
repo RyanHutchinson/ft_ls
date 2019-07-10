@@ -1,24 +1,40 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_flagchecker.c                                   :+:      :+:    :+:   */
+/*   ft_argumentparsing.c                               :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:14:25 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/09 15:37:27 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/10 11:40:47 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-int ft_flagchecker(int ac, char **av, t_dirs *dirs, int *flags, char *path)
+void	ft_flagsetter(int *flags, char *str)
 {
-	int i;
-	char *str;
+	while (*str == 'l' || *str == 'a' || *str == 'R' || *str == 'r' \
+																|| *str == 't')
+	{
+		if (*str == 'l')
+			*flags |= FLAG_L;
+		if (*str == 'a')
+			*flags |= FLAG_A;
+		if (*str == 'R')
+			*flags |= FLAG_RECURSE;
+		if (*str == 'r')
+			*flags |= FLAG_R;
+		if (*str == 't')
+			*flags |= FLAG_T;
+		str++;
+	}
+}
 
-	(void)path;//-----------------------------------------------------------------delete
-	(void)dirs;//-----------------------------------------------------------------delete
+t_dirs	*ft_argparser(int ac, char **av, t_dirs *dirs, int *flags)
+{
+	int		i;
+	char	*str;
 
 	i = 1;
 	while (i < ac)
@@ -27,24 +43,11 @@ int ft_flagchecker(int ac, char **av, t_dirs *dirs, int *flags, char *path)
 		if (*str == '-')
 		{
 			str++;
-			while (*str == 'l' || *str == 'a' || *str == 'R' ||
-				   *str == 'r' || *str == 't')
-			{
-				if (*str == 'l')
-					*flags |= 1;
-				if (*str == 'a')
-					*flags |= 2;
-				if (*str == 'R')
-					*flags |= 4;
-				if (*str == 'r')
-					*flags |= 8;
-				if (*str == 't')
-					*flags |= 16;
-				str++;
-			}
-			i++;
+			ft_flagsetter(flags, str);
 		}
+		else
+			dirs = ft_adddir(str, dirs);
+		i++;
 	}
-	
-	return (i);
+	return (dirs);
 }
