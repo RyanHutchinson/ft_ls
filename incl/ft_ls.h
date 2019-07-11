@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/10 14:51:09 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 08:56:22 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -70,15 +70,15 @@ void			ft_dirsdel(t_dirs *dirs);
 
 t_file		    *ft_newnode();
 t_file    		*ft_addnode(t_file *node, char *file_name, struct stat stats);
-void			ft_nodeswap(t_file **scan1, t_file **scan2, t_file **scanner, t_file **head);
+void			ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head, t_file **scanner);
 void		    ft_sortlist(t_file **head);
 void            ft_revlist(t_file **head);
 void	   		ft_sortlisttime(t_file **head);
 void			ft_dellist(t_file *head);
 
-char			*ft_convertUID(struct stat stats);
-char			*ft_convertGID(struct stat stats);
-void			ft_convertTime(t_file *node);
-char			*ft_convertAtt(struct stat stats);
+char			*ft_convertuid(struct stat stats);
+char			*ft_convertgid(struct stat stats);
+void			ft_converttime(t_file *node);
+char			*ft_convertatt(struct stat stats);
 
 #endif

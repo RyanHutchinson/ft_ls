@@ -6,13 +6,13 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/10 11:06:25 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 08:55:35 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-char	*ft_convertUID(struct stat stats)
+char	*ft_convertuid(struct stat stats)
 {
 	struct group	*grp;
 
@@ -20,15 +20,15 @@ char	*ft_convertUID(struct stat stats)
 	return (ft_strdup(grp->gr_name));
 }
 
-char	*ft_convertGID(struct stat stats)
+char	*ft_convertgid(struct stat stats)
 {
 	struct passwd	*user;
 
-	user  = getpwuid(stats.st_uid);
+	user = getpwuid(stats.st_uid);
 	return (ft_strdup(user->pw_name));
 }
 
-void	ft_convertTime(t_file *node)
+void	ft_converttime(t_file *node)
 {
 	char	*str;
 	char	**arr;
@@ -41,7 +41,7 @@ void	ft_convertTime(t_file *node)
 	node->year = ft_strdup(arr[4]);
 }
 
-char	*ft_convertAtt(struct stat stats)
+char	*ft_convertatt(struct stat stats)
 {
 	char		attr[11];
 
@@ -56,6 +56,5 @@ char	*ft_convertAtt(struct stat stats)
 	attr[8] = ((stats.st_mode & S_IWOTH) ? 'w' : '-');
 	attr[9] = ((stats.st_mode & S_IXOTH) ? 'x' : '-');
 	attr[10] = '\0';
-
 	return (ft_strdup(attr));
 }
