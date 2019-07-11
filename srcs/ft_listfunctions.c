@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 09:21:41 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 11:01:35 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -66,7 +66,7 @@ void	ft_dellist(t_file *head)
 		scanner->links = 0;
 		ft_strdel(&scanner->userID);
 		ft_strdel(&scanner->groupID);
-		scanner->time = 0;
+		scanner->rawtime = 0;
 		ft_strdel(&scanner->day);
 		ft_strdel(&scanner->month);
 		ft_strdel(&scanner->year);
@@ -75,4 +75,5 @@ void	ft_dellist(t_file *head)
 		scanner->next = NULL;
 		scanner = tmp;
 	}
+	head = NULL;
 }

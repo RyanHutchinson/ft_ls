@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 08:55:35 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:56:04 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -39,6 +39,13 @@ void	ft_converttime(t_file *node)
 	node->day = ft_strdup(arr[2]);
 	node->time = ft_strsub(arr[3], 0, 5);
 	node->year = ft_strdup(arr[4]);
+	ft_strdel(&arr[0]);
+	ft_strdel(&arr[1]);
+	ft_strdel(&arr[2]);
+	ft_strdel(&arr[3]);
+	ft_strdel(&arr[4]);
+	ft_strdel(&arr[5]);
+	free(arr);
 }
 
 char	*ft_convertatt(struct stat stats)

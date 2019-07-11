@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:51:45 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/10 10:29:59 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 10:51:36 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,4 +55,5 @@ void	ft_dirsdel(t_dirs *dirs)
 		dirs->next = NULL;
 		scanner = tmp;
 	}
+	dirs = NULL;
 }

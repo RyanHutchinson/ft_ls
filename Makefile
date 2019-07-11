@@ -6,7 +6,7 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/10 13:15:05 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/11 10:47:32 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,8 @@ $(NAME):
 	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
 	mv *.o ./srcs
 	mv a.out ls
+	rm -f $(OBJ)
+	rm -f $(OBJ2)
 
 clean:
 	rm -f $(OBJ)
