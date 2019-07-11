@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 08:56:22 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 09:22:15 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,8 @@
 
 #define BIT(X) (1 << X)
 
-#define FLAG_L BIT(0) // --0001
-#define FLAG_A BIT(1) // --0010
+#define FLAG_L BIT(0)
+#define FLAG_A BIT(1)
 #define FLAG_RECURSE BIT(2)
 #define FLAG_R BIT(3)
 #define FLAG_T BIT(4)
@@ -37,6 +37,7 @@ typedef	struct		s_file
 	char			*attributes;
 	char			*file_name;
 	unsigned int	links;
+	long			blocks;
 	char			*userID;
 	char			*groupID;
 	int				size;

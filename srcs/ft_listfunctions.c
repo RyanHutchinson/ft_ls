@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 08:59:15 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/11 09:21:41 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,6 +20,7 @@ t_file	*ft_newnode(char *file_name, struct stat stats)
 	new->attributes = ft_convertatt(stats);
 	new->file_name = ft_strdup(file_name);
 	new->links = stats.st_nlink;
+	new->blocks = stats.st_blocks;
 	new->userID = ft_convertuid(stats);
 	new->groupID = ft_convertgid(stats);
 	new->size = stats.st_size;
