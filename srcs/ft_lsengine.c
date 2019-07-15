@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:35 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 14:13:26 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static void	ft_recurseengine(t_file *head, char *path, int flags)
 		{
 			tmppath = ft_strjoin(path, "/");
 			fullpath = ft_strjoin(tmppath, scanner->file_name);
-			printf("\n./%s:\n", scanner->file_name);
+			printf("\n%s:\n", fullpath);
 			ft_lsengine(flags, fullpath);
 			ft_strdel(&tmppath);
 			ft_strdel(&fullpath);
