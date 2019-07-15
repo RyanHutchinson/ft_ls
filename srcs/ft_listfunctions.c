@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 08:24:10 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 10:10:43 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,8 +21,8 @@ t_file	*ft_newnode(char *file_name, struct stat stats)
 	new->file_name = ft_strdup(file_name);
 	new->links = stats.st_nlink;
 	new->blocks = stats.st_blocks;
-	new->userID = ft_convertuid(stats);
-	new->groupID = ft_convertgid(stats);
+	new->userid = ft_convertuid(stats);
+	new->groupid = ft_convertgid(stats);
 	new->size = stats.st_size;
 	new->rawtime = stats.st_mtime;
 	ft_converttime(new);
@@ -64,8 +64,8 @@ void	ft_dellist(t_file *head)
 		ft_strdel(&scanner->attributes);
 		ft_strdel(&scanner->file_name);
 		scanner->links = 0;
-		ft_strdel(&scanner->userID);
-		ft_strdel(&scanner->groupID);
+		ft_strdel(&scanner->userid);
+		ft_strdel(&scanner->groupid);
 		scanner->rawtime = 0;
 		ft_strdel(&scanner->day);
 		ft_strdel(&scanner->month);

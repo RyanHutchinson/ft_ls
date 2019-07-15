@@ -6,18 +6,28 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:23:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 10:41:13 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 10:39:07 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-void	ft_readandbuild(int flags, char *path, t_file **head, size_t *minwidth)
+static char		*ft_fullpath(char *path, struct dirent *de)
+{
+	char			*tmppath;
+	char			*fullpath;
+
+	tmppath = ft_strjoin(path, "/");
+	fullpath = ft_strjoin(tmppath, de->d_name);
+	return (fullpath);
+}
+
+void			ft_readandbuild(int flags, char *path, t_file **head,\
+													size_t *minwidth)
 {
 	DIR				*dr;
 	struct dirent	*de;
 	struct stat		stats;
-	char			*tmppath;
 	char			*fullpath;
 
 	dr = opendir(path);
@@ -25,11 +35,8 @@ void	ft_readandbuild(int flags, char *path, t_file **head, size_t *minwidth)
 		printf("The bad has happened -_- you are nowhere\n");
 	while ((de = readdir(dr)) != NULL)
 	{
-		tmppath = ft_strjoin(path, "/");
-		fullpath = ft_strjoin(tmppath, de->d_name);
+		fullpath = ft_fullpath(path, de);
 		lstat(fullpath, &stats);
-		ft_strdel(&tmppath);
-		ft_strdel(&fullpath);
 		if (de->d_name[0] == '.' && !(flags & FLAG_A))
 		{
 			continue;

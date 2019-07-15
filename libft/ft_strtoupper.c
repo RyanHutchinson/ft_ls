@@ -3,24 +3,24 @@
 /*                                                        :::      ::::::::   */
 /*   ft_strtoupper.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: marvin <marvin@student.42.fr>              +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/13 19:37:04 by marvin            #+#    #+#             */
-/*   Updated: 2019/06/13 19:37:04 by marvin           ###   ########.fr       */
+/*   Updated: 2019/07/15 10:01:55 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-char    *ft_strtoupper(char *str)
+char	*ft_strtoupper(char *str)
 {
-    int i;
+	int	i;
 
-    i = 0;
-    while (str[i] != '\0')
-    {
-        str[i] = ft_toupper(str[i]);
-        i++;
-    }
-    return(str);
+	i = 0;
+	while (str[i] != '\0')
+	{
+		str[i] = ft_toupper(str[i]);
+		i++;
+	}
+	return (str);
 }

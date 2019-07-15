@@ -6,19 +6,19 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:25:30 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/02 15:07:29 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 10:03:01 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../incl/ft_ls.h"
 
-int main (int ac, char **av)
+int	main(int ac, char **av)
 {
-    if (ac < 1)
-        {
-            printf("how?!?!?!?!?\n");
-            return (0);
-        }
-    ft_ls(ac, av);
-    return (0);    
+	if (ac < 1)
+	{
+		printf("how?!?!?!?!?\n");
+		return (0);
+	}
+	ft_ls(ac, av);
+	return (0);
 }
