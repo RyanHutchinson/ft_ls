@@ -6,11 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:30:27 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:22 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 static	long	ft_blockcounter(t_file **head)
 {
@@ -27,7 +27,22 @@ static	long	ft_blockcounter(t_file **head)
 	return (i);
 }
 
-static	void	ft_longprinter(t_file *scanner)
+static void		ft_linkprint(char *path, t_file *ptr)
+{
+	char		buffer[65];
+	char		*tpath;
+	char		*tmp;
+
+	ft_bzero(&buffer, 65);
+	tmp = ft_strjoin(path, "/");
+	tpath = ft_strjoin(tmp, ptr->file_name);
+	ft_strdel(&tmp);
+	readlink(tpath, buffer, 64);
+	printf(" -> %s\n", buffer);
+	ft_strdel(&tpath);
+}
+
+static	void	ft_longprinter(t_file *scanner, char *path)
 {
 	printf("%s ", scanner->attributes);//-------------------------- Printf
 	printf("%3d ", scanner->links);//------------------------------ Printf
@@ -37,13 +52,20 @@ static	void	ft_longprinter(t_file *scanner)
 	printf("%2s ", scanner->day);//-------------------------------- Printf
 	printf("%s ", scanner->month);//------------------------------- Printf
 	printf("%s ", scanner->time);//-------------------------------- Printf
-	printf("%s\n", scanner->file_name);//-------------------------- Printf
+	if (scanner->attributes[0] == 'l')
+	{
+		printf("%s", scanner->file_name);
+		ft_linkprint(path, scanner);
+	}
+	else
+		printf("%s\n", scanner->file_name);//-------------------------- Printf
 }
 
-void			ft_listprinter(t_file *head, size_t minwidth, int flags)
+void			ft_listprinter(t_file *head, size_t minwidth, int flags, char *path)
 {
 	t_file	*scanner;
 	long	i;
+	(void) minwidth;
 
 	i = ft_blockcounter(&head);
 	scanner = head;
@@ -53,15 +75,13 @@ void			ft_listprinter(t_file *head, size_t minwidth, int flags)
 	{
 		if (flags & FLAG_L)
 		{
-			ft_longprinter(scanner);
+			ft_longprinter(scanner, path);
 			scanner = scanner->next;
 		}
 		else
 		{
-			printf("%-*s", (int)minwidth, scanner->file_name);// Printf
+			printf("%s\n", scanner->file_name);// Printf
 			scanner = scanner->next;
 		}
 	}
-	if (!(flags & FLAG_L))
-		printf("\n");//----------------------------------------- Printf
 }

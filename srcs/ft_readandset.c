@@ -6,20 +6,19 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:23:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:39:07 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:46:37 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
-static char		*ft_fullpath(char *path, struct dirent *de)
+static void		ft_fullpath(char *path, struct dirent *de, char **fullpath)
 {
 	char			*tmppath;
-	char			*fullpath;
 
 	tmppath = ft_strjoin(path, "/");
-	fullpath = ft_strjoin(tmppath, de->d_name);
-	return (fullpath);
+	*fullpath = ft_strjoin(tmppath, de->d_name);
+	ft_strdel(&tmppath);
 }
 
 void			ft_readandbuild(int flags, char *path, t_file **head,\
@@ -35,8 +34,9 @@ void			ft_readandbuild(int flags, char *path, t_file **head,\
 		printf("The bad has happened -_- you are nowhere\n");
 	while ((de = readdir(dr)) != NULL)
 	{
-		fullpath = ft_fullpath(path, de);
+		ft_fullpath(path, de, &fullpath);
 		lstat(fullpath, &stats);
+		ft_strdel(&fullpath);
 		if (de->d_name[0] == '.' && !(flags & FLAG_A))
 		{
 			continue;
@@ -44,8 +44,8 @@ void			ft_readandbuild(int flags, char *path, t_file **head,\
 		else
 		{
 			*head = ft_addnode(*head, de->d_name, stats);
-			if (strlen(de->d_name) > *minwidth)
-				*minwidth = strlen(de->d_name);
+			if (ft_strlen(de->d_name) > *minwidth)
+				*minwidth = ft_strlen(de->d_name);
 		}
 	}
 	closedir(dr);

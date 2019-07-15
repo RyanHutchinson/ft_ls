@@ -6,26 +6,53 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 08:04:12 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:03 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
-char	*ft_convertuid(struct stat stats)
+static char		ft_filetype(int mode)
 {
-	struct group	*grp;
-
-	grp = getgrgid(stats.st_gid);
-	return (ft_strdup(grp->gr_name));
+	mode = (mode & S_IFMT);
+	if (S_ISREG(mode))
+		return ('-');
+	else if (S_ISDIR(mode))
+		return ('d');
+	else if (S_ISLNK(mode))
+		return ('l');
+	else if (S_ISBLK(mode))
+		return ('b');
+	else if (S_ISCHR(mode))
+		return ('c');
+	else if (S_ISSOCK(mode))
+		return ('s');
+	else if (S_ISFIFO(mode))
+		return ('p');
+	else
+		return ('-');
 }
 
 char	*ft_convertgid(struct stat stats)
 {
+	struct group	*grp;
+
+	grp = getgrgid(stats.st_gid);
+	if (grp != NULL)
+		return (ft_strdup(grp->gr_name));
+	else
+		return (ft_strdup(ft_itoa(stats.st_gid)));
+}
+
+char	*ft_convertuid(struct stat stats)
+{
 	struct passwd	*user;
 
 	user = getpwuid(stats.st_uid);
-	return (ft_strdup(user->pw_name));
+	if (user != NULL)
+		return (ft_strdup(user->pw_name));
+	else
+		return (ft_strdup(ft_itoa(stats.st_uid)));
 }
 
 void	ft_converttime(t_file *node)
@@ -52,7 +79,7 @@ char	*ft_convertatt(struct stat stats)
 {
 	char		attr[11];
 
-	attr[0] = ((S_ISDIR(stats.st_mode)) ? 'd' : '-');
+	attr[0] = ft_filetype(stats.st_mode);
 	attr[1] = ((stats.st_mode & S_IRUSR) ? 'r' : '-');
 	attr[2] = ((stats.st_mode & S_IWUSR) ? 'w' : '-');
 	attr[3] = ((stats.st_mode & S_IXUSR) ? 'x' : '-');

@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:09:57 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 11:22:40 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -63,7 +63,7 @@ void				ft_readandbuild(int flags, char *path, t_file **head,\
 void				ft_lsengine(int flags, char *path);
 t_dirs				*ft_argparser(int ac, char **av, t_dirs *dirs, int *flags);
 void				ft_flagsetter(int *flags, char *str);
-void				ft_listprinter(t_file *head, size_t minwidth, int flags);
+void				ft_listprinter(t_file *head, size_t minwidth, int flags, char *path);
 
 t_dirs				*ft_adddir(char *path, t_dirs *dirs);
 t_dirs				*ft_newdirs(char *path);

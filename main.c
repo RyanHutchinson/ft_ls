@@ -6,11 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:25:30 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:03:01 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:37:57 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 int	main(int ac, char **av)
 {

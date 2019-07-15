@@ -6,7 +6,7 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/11 10:47:32 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/15 13:42:57 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,7 +18,7 @@ OBJ = *.o
 
 OBJ2 = ./srcs/*.o
 
-INCL = ./incl/ft_ls.h libft/libft.a
+INCL = ./includes/ft_ls.h libft/libft.a
 
 all: $(NAME)
 
@@ -28,9 +28,7 @@ $(NAME):
 	ranlib $(NAME)
 	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
 	mv *.o ./srcs
-	mv a.out ls
-	rm -f $(OBJ)
-	rm -f $(OBJ2)
+	mv a.out ft_ls
 
 clean:
 	rm -f $(OBJ)
@@ -38,7 +36,7 @@ clean:
 
 fclean: clean
 	rm -f $(NAME)
-	rm -f ls
+	rm -f ft_ls
 
 re: fclean all
 

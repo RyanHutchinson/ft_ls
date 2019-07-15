@@ -6,11 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:10:43 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:16 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 t_file	*ft_newnode(char *file_name, struct stat stats)
 {
@@ -64,8 +64,10 @@ void	ft_dellist(t_file *head)
 		ft_strdel(&scanner->attributes);
 		ft_strdel(&scanner->file_name);
 		scanner->links = 0;
+		scanner->blocks = 0;
 		ft_strdel(&scanner->userid);
 		ft_strdel(&scanner->groupid);
+		scanner->size = 0;
 		scanner->rawtime = 0;
 		ft_strdel(&scanner->day);
 		ft_strdel(&scanner->month);
@@ -74,6 +76,7 @@ void	ft_dellist(t_file *head)
 		scanner->previous = NULL;
 		scanner->next = NULL;
 		scanner = tmp;
+		tmp = NULL;
 	}
 	head = NULL;
 }

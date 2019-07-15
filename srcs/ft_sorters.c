@@ -6,13 +6,34 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:59:48 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/11 11:07:48 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:52 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
-void	ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head, \
+static void	ft_timeswap(t_file **head)
+{
+	t_file	*scan1;
+	t_file	*scan2;
+	t_file	*scanner;
+
+	scanner = *head;
+	while (scanner != NULL)
+	{
+		scan1 = scanner;
+		scan2 = scan1->next;
+		if (scan2 == NULL)
+			break ;
+		if ((ft_strcmp(scan1->time, scan2->time) == 0) && scan1->file_name\
+														< scan2->file_name)
+			ft_nodeswap(&scan1, &scan2, head, &scanner);
+		else
+			scanner = scanner->next;
+	}
+}
+
+void		ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head, \
 t_file **scanner)
 {
 	t_file *temp;
@@ -33,7 +54,7 @@ t_file **scanner)
 	*scanner = *head;
 }
 
-void	ft_sortlist(t_file **head)
+void		ft_sortlist(t_file **head)
 {
 	t_file	*scan1;
 	t_file	*scan2;
@@ -53,7 +74,7 @@ void	ft_sortlist(t_file **head)
 	}
 }
 
-void	ft_revlist(t_file **head)
+void		ft_revlist(t_file **head)
 {
 	t_file	*scan1;
 	t_file	*scan2;
@@ -73,7 +94,7 @@ void	ft_revlist(t_file **head)
 	}
 }
 
-void	ft_sortlisttime(t_file **head)
+void		ft_sortlisttime(t_file **head)
 {
 	t_file	*scan1;
 	t_file	*scan2;
@@ -86,9 +107,10 @@ void	ft_sortlisttime(t_file **head)
 		scan2 = scan1->next;
 		if (scan2 == NULL)
 			break ;
-		if (difftime(scan1->rawtime, scan2->rawtime) > 0)
+		if ((scan1->rawtime - scan2->rawtime) < 0)
 			ft_nodeswap(&scan1, &scan2, head, &scanner);
 		else
 			scanner = scanner->next;
 	}
+	ft_timeswap(head);
 }

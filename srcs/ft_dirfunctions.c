@@ -6,11 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:51:45 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 08:16:31 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:09 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 t_dirs	*ft_newdirs(char *path)
 {

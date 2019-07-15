@@ -6,11 +6,11 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 10:23:49 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/15 13:36:35 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../incl/ft_ls.h"
+#include "../includes/ft_ls.h"
 
 static void	ft_recurseengine(t_file *head, char *path, int flags)
 {
@@ -49,7 +49,7 @@ void		ft_lsengine(int flags, char *path)
 		ft_sortlisttime(&head);
 	if (flags & FLAG_R)
 		ft_revlist(&head);
-	ft_listprinter(head, (minwidth + 1), flags);
+	ft_listprinter(head, (minwidth + 1), flags, path);
 	if (flags & FLAG_RECURSE)
 		ft_recurseengine(head, path, flags);
 	ft_dellist(head);
