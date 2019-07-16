@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:23:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 14:40:26 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 08:05:08 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void			ft_readandbuild(int flags, char *path, t_file **head,\
 	struct stat		stats;
 	char			*fullpath;
 
-	printf("****%s\n****", path);
 	dr = opendir(path);
 	if (dr == NULL)
 		printf("The bad has happened -_- you are nowhere\n");

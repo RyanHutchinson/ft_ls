@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:59:48 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:52 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 08:07:15 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,8 +25,8 @@ static void	ft_timeswap(t_file **head)
 		scan2 = scan1->next;
 		if (scan2 == NULL)
 			break ;
-		if ((ft_strcmp(scan1->time, scan2->time) == 0) && scan1->file_name\
-														< scan2->file_name)
+		if ((ft_strcmp(scan1->time, scan2->time) == 0) && \
+		ft_strcmp(scan1->file_name, scan2->file_name) < 0)
 			ft_nodeswap(&scan1, &scan2, head, &scanner);
 		else
 			scanner = scanner->next;
