@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:23:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 08:05:08 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:44:41 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,10 @@ void			ft_readandbuild(int flags, char *path, t_file **head,\
 
 	dr = opendir(path);
 	if (dr == NULL)
-		printf("The bad has happened -_- you are nowhere\n");
+	{
+		printf("the path: %s is not openable?", path);//---------------------- Printf
+		return;
+	}
 	while ((de = readdir(dr)) != NULL)
 	{
 		ft_fullpath(path, de, &fullpath);

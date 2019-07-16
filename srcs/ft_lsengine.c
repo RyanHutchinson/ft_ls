@@ -6,19 +6,19 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 08:16:40 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 10:12:15 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static void	ft_recurseengine(t_file *head, char *path, int flags)
+static void	ft_recurseengine(t_file **head, char *path, int flags)
 {
 	t_file	*scanner;
 	char	*tmppath;
 	char	*fullpath;
 
-	scanner = head;
+	scanner = *head;
 	while (scanner != NULL)
 	{
 		if (scanner->attributes[0] == 'd' &&\
@@ -47,13 +47,9 @@ void		ft_lsengine(int flags, char *path)
 	head = NULL;
 	minwidth = 0;
 	ft_readandbuild(flags, path, &head, &minwidth);
-	ft_sortlist(&head);
-	if (flags & FLAG_T)
-		ft_sortlisttime(&head);
-	if (flags & FLAG_R)
-		ft_revlist(&head);
+	ft_sortlist(&head, flags);
 	ft_listprinter(head, (minwidth + 1), flags, path);
 	if (flags & FLAG_RECURSE)
-		ft_recurseengine(head, path, flags);
-	ft_dellist(head);
+		ft_recurseengine(&head, path, flags);
+	ft_dellist(&head);
 }

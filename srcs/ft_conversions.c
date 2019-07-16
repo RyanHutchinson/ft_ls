@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:03 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:49:27 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,7 +41,7 @@ char	*ft_convertgid(struct stat stats)
 	if (grp != NULL)
 		return (ft_strdup(grp->gr_name));
 	else
-		return (ft_strdup(ft_itoa(stats.st_gid)));
+		return (ft_itoa(stats.st_gid));
 }
 
 char	*ft_convertuid(struct stat stats)
@@ -52,7 +52,7 @@ char	*ft_convertuid(struct stat stats)
 	if (user != NULL)
 		return (ft_strdup(user->pw_name));
 	else
-		return (ft_strdup(ft_itoa(stats.st_uid)));
+		return (ft_itoa(stats.st_uid));
 }
 
 void	ft_converttime(t_file *node)

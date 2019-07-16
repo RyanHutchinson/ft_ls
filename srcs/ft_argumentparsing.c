@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:14:25 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:35:57 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:28:27 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -31,7 +31,7 @@ void	ft_flagsetter(int *flags, char *str)
 	}
 }
 
-t_dirs	*ft_argparser(int ac, char **av, t_dirs *dirs, int *flags)
+t_dirs	*ft_argparser(int ac, char **av, t_dirs **dirs, int *flags)
 {
 	int		i;
 	char	*str;
@@ -46,8 +46,8 @@ t_dirs	*ft_argparser(int ac, char **av, t_dirs *dirs, int *flags)
 			ft_flagsetter(flags, str);
 		}
 		else
-			dirs = ft_adddir(str, dirs);
+			*dirs = ft_adddir(str, *dirs);
 		i++;
 	}
-	return (dirs);
+	return (*dirs);
 }

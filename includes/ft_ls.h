@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 11:22:40 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:21:37 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,23 +61,23 @@ void				ft_ls(int ac, char **av);
 void				ft_readandbuild(int flags, char *path, t_file **head,\
 														size_t *minwidth);
 void				ft_lsengine(int flags, char *path);
-t_dirs				*ft_argparser(int ac, char **av, t_dirs *dirs, int *flags);
+t_dirs				*ft_argparser(int ac, char **av, t_dirs **dirs, int *flags);
 void				ft_flagsetter(int *flags, char *str);
 void				ft_listprinter(t_file *head, size_t minwidth, int flags, char *path);
 
 t_dirs				*ft_adddir(char *path, t_dirs *dirs);
 t_dirs				*ft_newdirs(char *path);
-void				ft_dirsdel(t_dirs *dirs);
+void				ft_dirsdel(t_dirs **dirs);
 
 t_file				*ft_newnode();
 t_file				*ft_addnode(t_file *node, char *file_name,\
 											struct stat stats);
 void				ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head,\
 															t_file **scanner);
-void				ft_sortlist(t_file **head);
-void				ft_revlist(t_file **head);
-void				ft_sortlisttime(t_file **head);
-void				ft_dellist(t_file *head);
+void				ft_sortlist(t_file **head, int flags);
+void				frontbacksplit(t_file *tmphead, t_file **fh, t_file **bh);
+t_file				*ft_sortedmerge(t_file *fh, t_file *bh, int flags);
+void				ft_dellist(t_file **head);
 
 char				*ft_convertuid(struct stat stats);
 char				*ft_convertgid(struct stat stats);

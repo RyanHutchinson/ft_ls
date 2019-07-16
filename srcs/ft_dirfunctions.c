@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/09 13:51:45 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:09 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:35:25 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,18 +42,17 @@ t_dirs	*ft_adddir(char *path, t_dirs *dirs)
 	return (dirs);
 }
 
-void	ft_dirsdel(t_dirs *dirs)
+void	ft_dirsdel(t_dirs **dirs)
 {
 	t_dirs	*scanner;
-	t_dirs	*tmp;
+	t_dirs	*next;
 
-	scanner = dirs;
+	scanner = *dirs;
 	while (scanner != NULL)
 	{
-		tmp = dirs->next;
+		next = scanner->next;
 		ft_strdel(&scanner->dirname);
-		dirs->next = NULL;
-		scanner = tmp;
+		free(scanner);
+		scanner = next;
 	}
-	dirs = NULL;
 }

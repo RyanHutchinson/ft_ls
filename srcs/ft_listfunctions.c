@@ -6,13 +6,13 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:16 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/16 11:11:22 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-t_file	*ft_newnode(char *file_name, struct stat stats)
+t_file		*ft_newnode(char *file_name, struct stat stats)
 {
 	t_file	*new;
 
@@ -31,52 +31,54 @@ t_file	*ft_newnode(char *file_name, struct stat stats)
 	return (new);
 }
 
-t_file	*ft_addnode(t_file *head, char *file_name, struct stat stats)
+t_file		*ft_addnode(t_file *head, char *file_name, struct stat stats)
 {
 	t_file	*scanner;
-	t_file	*tmp;
+	t_file	*new;
 
+	scanner = head;
+	new = ft_newnode(file_name, stats);
 	if (head == NULL)
-		head = ft_newnode(file_name, stats);
+		return (new);
 	else
 	{
-		scanner = head;
-		while (scanner != NULL)
-		{
-			tmp = scanner;
+		while (scanner->next != NULL)
 			scanner = scanner->next;
-		}
-		tmp->next = ft_newnode(file_name, stats);
-		tmp->next->previous = tmp;
+		scanner->next = new;
+		new->previous = scanner;
 	}
 	return (head);
 }
 
-void	ft_dellist(t_file *head)
+static void	ft_delnode(t_file *node)
+{
+	ft_strdel(&node->attributes);
+	ft_strdel(&node->file_name);
+	node->links = 0;
+	node->blocks = 0;
+	ft_strdel(&node->userid);
+	ft_strdel(&node->groupid);
+	node->size = 0;
+	node->rawtime = 0;
+	ft_strdel(&node->day);
+	ft_strdel(&node->month);
+	ft_strdel(&node->year);
+	ft_strdel(&node->time);
+	node->next = NULL;
+	node->previous = NULL;
+	free(node);
+}
+
+void		ft_dellist(t_file **head)
 {
 	t_file	*scanner;
-	t_file	*tmp;
+	t_file	*next;
 
-	scanner = head;
+	scanner = *head;
 	while (scanner != NULL)
 	{
-		tmp = scanner->next;
-		ft_strdel(&scanner->attributes);
-		ft_strdel(&scanner->file_name);
-		scanner->links = 0;
-		scanner->blocks = 0;
-		ft_strdel(&scanner->userid);
-		ft_strdel(&scanner->groupid);
-		scanner->size = 0;
-		scanner->rawtime = 0;
-		ft_strdel(&scanner->day);
-		ft_strdel(&scanner->month);
-		ft_strdel(&scanner->year);
-		ft_strdel(&scanner->time);
-		scanner->previous = NULL;
-		scanner->next = NULL;
-		scanner = tmp;
-		tmp = NULL;
+		next = scanner->next;
+		ft_delnode(scanner);
+		scanner = next;
 	}
-	head = NULL;
 }
