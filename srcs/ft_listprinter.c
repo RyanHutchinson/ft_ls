@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:36:22 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 11:04:39 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -61,11 +61,10 @@ static	void	ft_longprinter(t_file *scanner, char *path)
 		printf("%s\n", scanner->file_name);//-------------------------- Printf
 }
 
-void			ft_listprinter(t_file *head, size_t minwidth, int flags, char *path)
+void			ft_listprinter(t_file *head, int flags, char *path)
 {
 	t_file	*scanner;
 	long	i;
-	(void) minwidth;
 
 	i = ft_blockcounter(&head);
 	scanner = head;

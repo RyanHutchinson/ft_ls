@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 11:35:07 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 10:38:54 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,6 +17,7 @@ void	ft_ls(int ac, char **av)
 	t_dirs	*dirs;
 	int		flags;
 	t_dirs	*scanner;
+	DIR		*dr;
 
 	flags = 0;
 	dirs = NULL;
@@ -26,7 +27,16 @@ void	ft_ls(int ac, char **av)
 	{
 		while (scanner != NULL)
 		{
-			printf("%s:\n", scanner->dirname);//-------------------------- Printf
+			dr = opendir(scanner->dirname);
+			if (errno == 0)
+				printf("%s:\n", scanner->dirname);//-------------------------- Printf
+			else if (errno == 13)
+			{
+				printf("Permission denied for: %s\n", scanner->dirname);
+				exit(0);
+			}
+			if (errno == 0)
+				closedir(dr);
 			ft_lsengine(flags, scanner->dirname);
 			printf("\n");//-------------------------------------------- Printf
 			scanner = scanner->next;
@@ -35,5 +45,4 @@ void	ft_ls(int ac, char **av)
 	else
 		ft_lsengine(flags, ".");
 	ft_dirsdel(&dirs);
-	sleep(60);
 }

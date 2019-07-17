@@ -6,7 +6,7 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/15 13:42:57 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/17 10:12:44 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -27,7 +27,7 @@ $(NAME):
 	ar rv $(NAME) $(OBJ) $(INCL)
 	ranlib $(NAME)
 	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
-	mv *.o ./srcs
+	mv *.o ./build
 	mv a.out ft_ls
 
 clean:

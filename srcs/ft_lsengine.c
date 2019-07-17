@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:28:20 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 10:12:15 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 10:57:39 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,13 +42,11 @@ static void	ft_recurseengine(t_file **head, char *path, int flags)
 void		ft_lsengine(int flags, char *path)
 {
 	t_file			*head;
-	size_t			minwidth;
 
 	head = NULL;
-	minwidth = 0;
-	ft_readandbuild(flags, path, &head, &minwidth);
+	ft_readandbuild(flags, path, &head);
 	ft_sortlist(&head, flags);
-	ft_listprinter(head, (minwidth + 1), flags, path);
+	ft_listprinter(head, flags, path);
 	if (flags & FLAG_RECURSE)
 		ft_recurseengine(&head, path, flags);
 	ft_dellist(&head);

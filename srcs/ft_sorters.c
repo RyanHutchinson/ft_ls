@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 10:59:48 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 09:28:51 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 08:20:49 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,10 @@ void		ft_sortlist(t_file **head, int flags)
 	frontbacksplit(tmphead, &fh, &bh);
 	ft_sortlist(&fh, flags);
 	ft_sortlist(&bh, flags);
-	*head = ft_sortedmerge(fh, bh, flags);
+	if (flags & FLAG_T)
+		*head = ft_sortedmerge_t(fh, bh, flags);
+	else
+		*head = ft_sortedmerge(fh, bh, flags);
 }
 
 void		frontbacksplit(t_file *tmphead, t_file **fh, t_file **bh)
@@ -74,44 +77,30 @@ t_file		*ft_sortedmerge(t_file *fh, t_file *bh, int flags)
 	}
 	return (result);
 }
-// static void	ft_timeswap(t_file **head)
-// {
-// 	t_file	*scan1;
-// 	t_file	*scan2;
-// 	t_file	*scanner;
 
-// 	scanner = *head;
-// 	while (scanner != NULL)
-// 	{
-// 		scan1 = scanner;
-// 		scan2 = scan1->next;
-// 		if (scan2 == NULL)
-// 			break ;
-// 		if ((ft_strcmp(scan1->time, scan2->time) == 0) && \
-// 		ft_strcmp(scan1->file_name, scan2->file_name) < 0)
-// 			ft_nodeswap(&scan1, &scan2, head, &scanner);
-// 		else
-// 			scanner = scanner->next;
-// 	}
-// }
+t_file		*ft_sortedmerge_t(t_file *fh, t_file *bh, unsigned char c)
+{
+	t_file *result;
 
-// void		ft_sortlisttime(t_file **head)
-// {
-// 	t_file	*scan1;
-// 	t_file	*scan2;
-// 	t_file	*scanner;
-
-// 	scanner = *head;
-// 	while (scanner != NULL)
-// 	{
-// 		scan1 = scanner;
-// 		scan2 = scan1->next;
-// 		if (scan2 == NULL)
-// 			break ;
-// 		if ((scan1->rawtime - scan2->rawtime) < 0)
-// 			ft_nodeswap(&scan1, &scan2, head, &scanner);
-// 		else
-// 			scanner = scanner->next;
-// 	}
-// 	ft_timeswap(head);
-// }
+	result = NULL;
+	if (fh == NULL)
+		return (bh);
+	else if (bh == NULL)
+		return (fh);
+	if (!(c & FLAG_R) && (fh->rawtime > bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else if ((c & FLAG_R) && (fh->rawtime < bh->rawtime))
+	{
+		result = fh;
+		result->next = ft_sortedmerge_t(fh->next, bh, c);
+	}
+	else
+	{
+		result = bh;
+		result->next = ft_sortedmerge_t(fh, bh->next, c);
+	}
+	return (result);
+}

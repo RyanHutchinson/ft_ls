@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 11:21:37 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 10:57:35 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -22,6 +22,7 @@
 # include <grp.h>
 # include <pwd.h>
 # include <time.h>
+# include <errno.h>
 # include <stdio.h>
 
 # define BIT(X) (1 << X)
@@ -58,12 +59,11 @@ typedef	struct		s_dirs
 
 void				ft_ls(int ac, char **av);
 
-void				ft_readandbuild(int flags, char *path, t_file **head,\
-														size_t *minwidth);
+void				ft_readandbuild(int flags, char *path, t_file **head);
 void				ft_lsengine(int flags, char *path);
 t_dirs				*ft_argparser(int ac, char **av, t_dirs **dirs, int *flags);
 void				ft_flagsetter(int *flags, char *str);
-void				ft_listprinter(t_file *head, size_t minwidth, int flags, char *path);
+void				ft_listprinter(t_file *head, int flags, char *path);
 
 t_dirs				*ft_adddir(char *path, t_dirs *dirs);
 t_dirs				*ft_newdirs(char *path);
@@ -77,6 +77,7 @@ void				ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head,\
 void				ft_sortlist(t_file **head, int flags);
 void				frontbacksplit(t_file *tmphead, t_file **fh, t_file **bh);
 t_file				*ft_sortedmerge(t_file *fh, t_file *bh, int flags);
+t_file				*ft_sortedmerge_t(t_file *fh, t_file *bh, unsigned char c);
 void				ft_dellist(t_file **head);
 
 char				*ft_convertuid(struct stat stats);
