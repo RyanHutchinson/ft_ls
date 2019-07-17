@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 12:57:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 14:05:51 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 14:54:29 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,7 @@ void	ft_lserror(int error, char *str)
 	{
 		ft_putstr(str);
 		ft_putstr(" is not a valid Directory");
-		ft_putstr("\n\n");
+		ft_putstr("\n");
 	}
 	if (error == 3)
 	{

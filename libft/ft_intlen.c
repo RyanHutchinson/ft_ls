@@ -1,24 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   ft_intlen.c                                        :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2019/07/02 14:25:30 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/15 13:37:57 by rhutchin         ###   ########.fr       */
+/*   Created: 2019/07/17 15:29:37 by rhutchin          #+#    #+#             */
+/*   Updated: 2019/07/17 15:30:08 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "../includes/ft_ls.h"
+#include "libft.h"
 
-int	main(int ac, char **av)
+int	ft_intlen(long int num)
 {
-	if (ac < 1)
+	unsigned int	i;
+
+	i = 0;
+	if (num < 0)
 	{
-		printf("how?!?!?!?!?\n");
-		return (0);
+		num = num * -1;
+		i++;
 	}
-	ft_ls(ac, av);
-	return (0);
+	while (num >= 10)
+	{
+		num = num / 10;
+		i++;
+	}
+	i++;
+	return (i);
 }

@@ -6,37 +6,52 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/17 10:12:44 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/17 16:30:54 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME =	ft_ls.a
+NAME =	ft_ls
 
-SRC =	./srcs/*.c
+SRC =	ft_argumentparsing.c ft_conversions.c \
+		ft_dirfunctions.c ft_errorprinting.c \
+		ft_listfunctions.c ft_listprinter.c \
+		ft_lsengine.c ft_readandbuild.c ft_sorters.c \
+		ft_printerformatting.c ft_ls.c
 
-OBJ = *.o
+DIR_O = obj
+DIR_S = srcs
 
-OBJ2 = ./srcs/*.o
+SRCS = $(addprefix $(DIR_S)/,$(SRC))
+OBJECTS = $(addprefix $(DIR_O)/,$(SRC:.c=.o))
 
-INCL = ./includes/ft_ls.h libft/libft.a
+INCL = -I./includes -I./libft/
 
-all: $(NAME)
+$(DIR_O)/%.o: $(DIR_S)/%.c
+	@echo "\033[1;35;m[Compiling $<] \t\033[0m"
+	@gcc -Wall -Werror -Wextra $(INCL) -c -o $@ $<
 
-$(NAME):
-	gcc -c -Wall -Werror -Wextra $(SRC)
-	ar rv $(NAME) $(OBJ) $(INCL)
-	ranlib $(NAME)
-	gcc -Wall -Werror -Wextra main.c $(NAME) $(INCL) -I./libft
-	mv *.o ./build
-	mv a.out ft_ls
+all: makelibft temp $(NAME)
+
+
+makelibft:
+	@make -C libft
+
+temp:
+	@mkdir -p obj
+
+$(NAME): temp $(OBJECTS)
+	@echo "\033[1;34;m[Making... $(NAME)]\033[0m"
+	@gcc -Wall -Werror -Wextra $(OBJECTS) $(INCL) -L ./libft -lft -o $(NAME)
 
 clean:
-	rm -f $(OBJ)
-	rm -f $(OBJ2)
+	@echo "\033[1;33;m[Cleaning]\033[0m"
+	@rm -f $(OBJECTS)
 
 fclean: clean
-	rm -f $(NAME)
-	rm -f ft_ls
+	@echo "\033[1;32;m[Force Cleaning]\033[0m"
+	@rm -f $(NAME)
 
 re: fclean all
+	@echo "\033[1;31;m[Recompiled]\033[0m"
 
+.PHONY: all clean fclean re

@@ -6,16 +6,16 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 13:53:09 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:58:34 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static	long	ft_blockcounter(t_file **head)
+static int	ft_blockcounter(t_file **head)
 {
 	t_file	*scanner;
-	long	i;
+	int		i;
 
 	scanner = *head;
 	i = 0;
@@ -27,7 +27,7 @@ static	long	ft_blockcounter(t_file **head)
 	return (i);
 }
 
-static void		ft_linkprint(char *path, t_file *ptr)
+static void	ft_linkprint(char *path, t_file *ptr)
 {
 	char		buffer[65];
 	char		*tpath;
@@ -42,44 +42,57 @@ static void		ft_linkprint(char *path, t_file *ptr)
 	ft_strdel(&tpath);
 }
 
-static	void	ft_longprinter(t_file *scanner, char *path)
+static void	ft_longprinter(t_file *scanner, char *path, t_file **head)
 {
-	printf("%s ", scanner->attributes);//-------------------------- Printf
-	printf("%3d ", scanner->links);//------------------------------ Printf
-	printf("%s  ", scanner->userid);//----------------------------- Printf
-	printf("%s  ", scanner->groupid);//---------------------------- Printf
-	printf("%5d ", scanner->size);//------------------------------- Printf
-	printf("%2s ", scanner->day);//-------------------------------- Printf
-	printf("%s ", scanner->month);//------------------------------- Printf
-	printf("%s ", scanner->time);//-------------------------------- Printf
+	ft_putstr(scanner->attributes);
+	ft_putstr("  ");
+	ft_linksprinter(scanner, head);
+	ft_putstr(scanner->userid);
+	ft_putstr("  ");
+	ft_putstr(scanner->groupid);
+	ft_putstr("  ");
+	ft_sizeprinter(scanner, head);
+	ft_dayprinter(scanner);
+	ft_putstr(scanner->month);
+	ft_putstr(" ");
+	ft_putstr(scanner->time);
+	ft_putstr(" ");
 	if (scanner->attributes[0] == 'l')
 	{
-		printf("%s", scanner->file_name);
+		ft_putstr(scanner->file_name);
 		ft_linkprint(path, scanner);
 	}
 	else
-		printf("%s\n", scanner->file_name);//-------------------------- Printf
+	{
+		ft_putstr(scanner->file_name);
+		ft_putchar('\n');
+	}
 }
 
-void			ft_listprinter(t_file *head, int flags, char *path)
+void		ft_listprinter(t_file *head, int flags, char *path)
 {
 	t_file	*scanner;
-	long	i;
+	int		i;
 
 	i = ft_blockcounter(&head);
 	scanner = head;
 	if ((flags & FLAG_L) && i != 0)
-		printf("total %ld\n", i);//-------------------------------- Printf
+	{
+		ft_putstr("total ");
+		ft_putnbr(i);
+		ft_putchar('\n');
+	}
 	while (scanner != NULL)
 	{
 		if (flags & FLAG_L)
 		{
-			ft_longprinter(scanner, path);
+			ft_longprinter(scanner, path, &head);
 			scanner = scanner->next;
 		}
 		else
 		{
-			printf("%s\n", scanner->file_name);// Printf
+			ft_putstr(scanner->file_name);
+			ft_putchar('\n');
 			scanner = scanner->next;
 		}
 	}

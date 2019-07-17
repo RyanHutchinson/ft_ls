@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 14:06:13 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 16:28:25 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -40,7 +40,7 @@ static void	ft_dirsengine(t_dirs **scanner, int flags)
 	}
 }
 
-void		ft_ls(int ac, char **av)
+int			main(int ac, char **av)
 {
 	t_dirs	*dirs;
 	int		flags;
@@ -55,4 +55,5 @@ void		ft_ls(int ac, char **av)
 	else
 		ft_lsengine(flags, ".");
 	ft_dirsdel(&dirs);
+	return 0;
 }

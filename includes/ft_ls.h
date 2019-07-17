@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 13:09:39 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 16:28:49 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,13 +57,15 @@ typedef	struct		s_dirs
 	struct s_dirs	*next;
 }					t_dirs;
 
-void				ft_ls(int ac, char **av);
-
 void				ft_readandbuild(int flags, char *path, t_file **head);
 void				ft_lsengine(int flags, char *path);
 t_dirs				*ft_argparser(int ac, char **av, t_dirs **dirs, int *flags);
 void				ft_flagsetter(int *flags, char *str);
+
 void				ft_listprinter(t_file *head, int flags, char *path);
+void				ft_linksprinter(t_file *scanner, t_file **head);
+void				ft_sizeprinter(t_file *scanner, t_file **head);
+void				ft_dayprinter(t_file *scanner);
 
 t_dirs				*ft_adddir(char *path, t_dirs *dirs);
 t_dirs				*ft_newdirs(char *path);

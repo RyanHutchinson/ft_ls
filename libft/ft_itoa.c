@@ -3,33 +3,14 @@
 /*                                                        :::      ::::::::   */
 /*   ft_itoa.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
-/*   By: rhutchin <marvin@42.fr>                    +#+  +:+       +#+        */
+/*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/05/27 12:11:09 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/05/28 16:08:46 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 15:31:10 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
-
-static int	ft_intlen(long int num)
-{
-	unsigned int	i;
-
-	i = 0;
-	if (num < 0)
-	{
-		num = num * -1;
-		i++;
-	}
-	while (num >= 10)
-	{
-		num = num / 10;
-		i++;
-	}
-	i++;
-	return (i);
-}
 
 char		*ft_itoa(int n)
 {
