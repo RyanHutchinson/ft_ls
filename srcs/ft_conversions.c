@@ -6,13 +6,13 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/16 11:49:27 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:13:51 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-static char		ft_filetype(int mode)
+static char	ft_filetype(int mode)
 {
 	mode = (mode & S_IFMT);
 	if (S_ISREG(mode))
@@ -33,7 +33,7 @@ static char		ft_filetype(int mode)
 		return ('-');
 }
 
-char	*ft_convertgid(struct stat stats)
+char		*ft_convertgid(struct stat stats)
 {
 	struct group	*grp;
 
@@ -44,7 +44,7 @@ char	*ft_convertgid(struct stat stats)
 		return (ft_itoa(stats.st_gid));
 }
 
-char	*ft_convertuid(struct stat stats)
+char		*ft_convertuid(struct stat stats)
 {
 	struct passwd	*user;
 
@@ -55,7 +55,7 @@ char	*ft_convertuid(struct stat stats)
 		return (ft_itoa(stats.st_uid));
 }
 
-void	ft_converttime(t_file *node)
+void		ft_converttime(t_file *node)
 {
 	char	*str;
 	char	**arr;
@@ -75,7 +75,7 @@ void	ft_converttime(t_file *node)
 	free(arr);
 }
 
-char	*ft_convertatt(struct stat stats)
+char		*ft_convertatt(struct stat stats)
 {
 	char		attr[11];
 

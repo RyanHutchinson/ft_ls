@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 11:04:39 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:53:09 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -68,7 +68,7 @@ void			ft_listprinter(t_file *head, int flags, char *path)
 
 	i = ft_blockcounter(&head);
 	scanner = head;
-	if (flags & FLAG_L)
+	if ((flags & FLAG_L) && i != 0)
 		printf("total %ld\n", i);//-------------------------------- Printf
 	while (scanner != NULL)
 	{

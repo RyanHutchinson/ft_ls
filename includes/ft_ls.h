@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 10:57:35 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:09:39 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -84,5 +84,7 @@ char				*ft_convertuid(struct stat stats);
 char				*ft_convertgid(struct stat stats);
 void				ft_converttime(t_file *node);
 char				*ft_convertatt(struct stat stats);
+
+void				ft_lserror(int error, char *str);
 
 #endif

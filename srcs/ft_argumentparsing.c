@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:14:25 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 10:34:30 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/17 13:41:56 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,10 +32,7 @@ void	ft_flagsetter(int *flags, char *str)
 			str++;
 		}
 		else
-		{
-			printf("Invalid flag - %c\nft_ls usage is: [-alRrt] [file...]\n", *str);
-			exit(0);
-		}
+			ft_lserror(1, str);
 	}
 }
 
