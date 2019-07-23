@@ -6,19 +6,19 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 13:14:44 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:12:28 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 #include "stdio.h"
 
-static int	*ft_padding(t_file **head)
+static size_t	*ft_padding(t_file **head)
 {
 	t_file	*scanner;
-	int		*padding;
+	size_t	*padding;
 
-	padding = malloc(sizeof(int) * 4);
+	padding = malloc(sizeof(size_t) * 4);
 	padding[0] = 0;
 	padding[1] = 0;
 	padding[2] = 0;
@@ -26,20 +26,20 @@ static int	*ft_padding(t_file **head)
 	scanner = *head;
 	while (scanner != NULL)
 	{
-		if (padding[0] < (int)ft_intlen(scanner->links))
-			padding[0] = (int)ft_intlen(scanner->links);
-		if (padding[1] < (int)ft_intlen(scanner->size))
-			padding[1] = (int)ft_intlen(scanner->size);
-		if (padding[2] < (int)ft_strlen(scanner->userid))
-			padding[2] = (int)ft_strlen(scanner->userid);
-		if (padding[3] < (int)ft_strlen(scanner->groupid))
-			padding[3] = (int)ft_strlen(scanner->groupid);
+		if (padding[0] < ft_intlen(scanner->links))
+			padding[0] = ft_intlen(scanner->links);
+		if (padding[1] < ft_intlen(scanner->size))
+			padding[1] = ft_intlen(scanner->size);
+		if (padding[2] < ft_strlen(scanner->userid))
+			padding[2] = ft_strlen(scanner->userid);
+		if (padding[3] < ft_strlen(scanner->groupid))
+			padding[3] = ft_strlen(scanner->groupid);
 		scanner = scanner->next;
 	}
 	return (padding);
 }
 
-static int	ft_blockcounter(t_file **head)
+static int		ft_blockcounter(t_file **head)
 {
 	t_file	*scanner;
 	int		i;
@@ -54,7 +54,7 @@ static int	ft_blockcounter(t_file **head)
 	return (i);
 }
 
-static void	ft_linkprint(char *path, t_file *ptr)
+static void		ft_linkprint(char *path, t_file *ptr)
 {
 	char		buffer[65];
 	char		*tpath;
@@ -71,7 +71,7 @@ static void	ft_linkprint(char *path, t_file *ptr)
 	ft_strdel(&tpath);
 }
 
-void		ft_longprinter(t_file *scanner, char *path, int *padding)
+void			ft_longprinter(t_file *scanner, char *path, size_t *padding)
 {
 	ft_putstr(scanner->attributes);
 	ft_putstr("  ");
@@ -96,11 +96,11 @@ void		ft_longprinter(t_file *scanner, char *path, int *padding)
 	}
 }
 
-void		ft_listprinter(t_file *head, int flags, char *path)
+void			ft_listprinter(t_file *head, int flags, char *path)
 {
 	t_file	*scanner;
 	int		i;
-	int		*padding;
+	size_t	*padding;
 
 	padding = ft_padding(&head);
 	i = ft_blockcounter(&head);

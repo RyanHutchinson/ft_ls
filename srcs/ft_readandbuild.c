@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/10 14:23:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 14:06:01 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 14:30:13 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,6 +52,11 @@ void			ft_readandbuild(int flags, char *path, t_file **head)
 	}
 	else if (errno == 13)
 		ft_lserror(3, path);
+	else if (errno == 2)
+	{
+		ft_lserror(2, path);
+		errno = 0;
+	}
 	else
 	{
 		ft_reader(flags, path, head, dr);

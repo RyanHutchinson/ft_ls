@@ -6,13 +6,14 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/23 13:09:05 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 13:14:28 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:05:25 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	ft_printiterator(t_file **scanner, int flags, char *path, int *padding)
+void	ft_printiterator(t_file **scanner, int flags, char *path, \
+size_t *padding)
 {
 	while (*scanner != NULL)
 	{

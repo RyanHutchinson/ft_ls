@@ -6,14 +6,15 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:16:11 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 12:54:50 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 15:14:19 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 
-void	ft_linksprinter(t_file *scanner, int *padding)
+void	ft_linksprinter(t_file *scanner, size_t *padding)
 {
+
 	int		i;
 
 	i = padding[0] - ft_intlen(scanner->links);
@@ -26,7 +27,7 @@ void	ft_linksprinter(t_file *scanner, int *padding)
 	ft_putchar(' ');
 }
 
-void	ft_useridprinter(t_file *scanner, int *padding)
+void	ft_useridprinter(t_file *scanner, size_t *padding)
 {
 	int		i;
 
@@ -40,7 +41,7 @@ void	ft_useridprinter(t_file *scanner, int *padding)
 	ft_putchar(' ');
 }
 
-void	ft_groupidprinter(t_file *scanner, int *padding)
+void	ft_groupidprinter(t_file *scanner, size_t *padding)
 {
 	int		i;
 
@@ -50,10 +51,11 @@ void	ft_groupidprinter(t_file *scanner, int *padding)
 		ft_putchar(' ');
 		i--;
 	}
+	ft_putchar(' ');
 	ft_putstr(scanner->groupid);
 }
 
-void	ft_sizeprinter(t_file *scanner, int *padding)
+void	ft_sizeprinter(t_file *scanner, size_t *padding)
 {
 	int		i;
 
@@ -76,3 +78,13 @@ void	ft_dayprinter(t_file *scanner)
 	ft_putstr(scanner->day);
 	ft_putchar(' ');
 }
+
+	// ft_putnbr(padding[0]);
+	// ft_putchar('\n');
+	// ft_putnbr(padding[1]);
+	// ft_putchar('\n');
+	// ft_putnbr(padding[2]);
+	// ft_putchar('\n');
+	// ft_putnbr(padding[3]);
+	// ft_putchar('\n');
+	// sleep(60);
