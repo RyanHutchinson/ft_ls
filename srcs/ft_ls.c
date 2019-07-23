@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 16:28:25 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 07:56:13 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -55,5 +55,5 @@ int			main(int ac, char **av)
 	else
 		ft_lsengine(flags, ".");
 	ft_dirsdel(&dirs);
-	return 0;
+	return (0);
 }

@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 10:23:08 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 12:31:19 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 08:02:18 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,6 +25,7 @@ t_file		*ft_newnode(char *file_name, struct stat stats)
 	new->groupid = ft_convertgid(stats);
 	new->size = stats.st_size;
 	new->rawtime = stats.st_mtime;
+	new->rawtimen = stats.st_mtimespec.tv_nsec;
 	ft_converttime(new);
 	new->next = NULL;
 	new->previous = NULL;

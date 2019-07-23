@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/08 10:17:41 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 13:13:51 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 08:36:05 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -83,12 +83,18 @@ char		*ft_convertatt(struct stat stats)
 	attr[1] = ((stats.st_mode & S_IRUSR) ? 'r' : '-');
 	attr[2] = ((stats.st_mode & S_IWUSR) ? 'w' : '-');
 	attr[3] = ((stats.st_mode & S_IXUSR) ? 'x' : '-');
+	if (stats.st_mode & S_ISUID)
+		attr[3] = ((attr[3] == 'x') ? 's' : 'S');
 	attr[4] = ((stats.st_mode & S_IRGRP) ? 'r' : '-');
 	attr[5] = ((stats.st_mode & S_IWGRP) ? 'w' : '-');
 	attr[6] = ((stats.st_mode & S_IXGRP) ? 'x' : '-');
+	if (stats.st_mode & S_ISGID)
+		attr[6] = ((attr[6]) == 'x' ? 's' : 'S');
 	attr[7] = ((stats.st_mode & S_IROTH) ? 'r' : '-');
 	attr[8] = ((stats.st_mode & S_IWOTH) ? 'w' : '-');
 	attr[9] = ((stats.st_mode & S_IXOTH) ? 'x' : '-');
+	if (stats.st_mode & S_ISVTX)
+		attr[9] = ((attr[9] == 'x') ? 't' : 'T');
 	attr[10] = '\0';
 	return (ft_strdup(attr));
 }

@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 16:28:49 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 08:13:32 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,6 +43,7 @@ typedef	struct		s_file
 	char			*groupid;
 	int				size;
 	time_t			rawtime;
+	time_t			rawtimen;
 	char			*day;
 	char			*month;
 	char			*year;
@@ -79,7 +80,9 @@ void				ft_nodeswap(t_file **scan1, t_file **scan2, t_file **head,\
 void				ft_sortlist(t_file **head, int flags);
 void				frontbacksplit(t_file *tmphead, t_file **fh, t_file **bh);
 t_file				*ft_sortedmerge(t_file *fh, t_file *bh, int flags);
-t_file				*ft_sortedmerge_t(t_file *fh, t_file *bh, unsigned char c);
+t_file				*ft_sortedmerge_t(t_file *fh, t_file *bh, int c);
+void				ft_checknano(int c, t_file *fh, t_file *bh, \
+															t_file **result);
 void				ft_dellist(t_file **head);
 
 char				*ft_convertuid(struct stat stats);

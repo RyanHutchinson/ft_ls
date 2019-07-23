@@ -6,11 +6,12 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/17 15:58:34 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 08:24:40 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
+#include "stdio.h"
 
 static int	ft_blockcounter(t_file **head)
 {
