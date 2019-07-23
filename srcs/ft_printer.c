@@ -1,17 +1,43 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_listprinter.c                                   :+:      :+:    :+:   */
+/*   ft_printer.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 08:24:40 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 13:14:44 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "../includes/ft_ls.h"
 #include "stdio.h"
+
+static int	*ft_padding(t_file **head)
+{
+	t_file	*scanner;
+	int		*padding;
+
+	padding = malloc(sizeof(int) * 4);
+	padding[0] = 0;
+	padding[1] = 0;
+	padding[2] = 0;
+	padding[3] = 0;
+	scanner = *head;
+	while (scanner != NULL)
+	{
+		if (padding[0] < (int)ft_intlen(scanner->links))
+			padding[0] = (int)ft_intlen(scanner->links);
+		if (padding[1] < (int)ft_intlen(scanner->size))
+			padding[1] = (int)ft_intlen(scanner->size);
+		if (padding[2] < (int)ft_strlen(scanner->userid))
+			padding[2] = (int)ft_strlen(scanner->userid);
+		if (padding[3] < (int)ft_strlen(scanner->groupid))
+			padding[3] = (int)ft_strlen(scanner->groupid);
+		scanner = scanner->next;
+	}
+	return (padding);
+}
 
 static int	ft_blockcounter(t_file **head)
 {
@@ -39,20 +65,20 @@ static void	ft_linkprint(char *path, t_file *ptr)
 	tpath = ft_strjoin(tmp, ptr->file_name);
 	ft_strdel(&tmp);
 	readlink(tpath, buffer, 64);
-	printf(" -> %s\n", buffer);
+	ft_putstr(" -> ");
+	ft_putstr(buffer);
+	ft_putchar('\n');
 	ft_strdel(&tpath);
 }
 
-static void	ft_longprinter(t_file *scanner, char *path, t_file **head)
+void		ft_longprinter(t_file *scanner, char *path, int *padding)
 {
 	ft_putstr(scanner->attributes);
 	ft_putstr("  ");
-	ft_linksprinter(scanner, head);
-	ft_putstr(scanner->userid);
-	ft_putstr("  ");
-	ft_putstr(scanner->groupid);
-	ft_putstr("  ");
-	ft_sizeprinter(scanner, head);
+	ft_linksprinter(scanner, padding);
+	ft_useridprinter(scanner, padding);
+	ft_groupidprinter(scanner, padding);
+	ft_sizeprinter(scanner, padding);
 	ft_dayprinter(scanner);
 	ft_putstr(scanner->month);
 	ft_putstr(" ");
@@ -74,7 +100,9 @@ void		ft_listprinter(t_file *head, int flags, char *path)
 {
 	t_file	*scanner;
 	int		i;
+	int		*padding;
 
+	padding = ft_padding(&head);
 	i = ft_blockcounter(&head);
 	scanner = head;
 	if ((flags & FLAG_L) && i != 0)
@@ -83,18 +111,6 @@ void		ft_listprinter(t_file *head, int flags, char *path)
 		ft_putnbr(i);
 		ft_putchar('\n');
 	}
-	while (scanner != NULL)
-	{
-		if (flags & FLAG_L)
-		{
-			ft_longprinter(scanner, path, &head);
-			scanner = scanner->next;
-		}
-		else
-		{
-			ft_putstr(scanner->file_name);
-			ft_putchar('\n');
-			scanner = scanner->next;
-		}
-	}
+	ft_printiterator(&head, flags, path, padding);
+	free(padding);
 }

@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 08:13:32 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/23 13:12:56 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -64,8 +64,12 @@ t_dirs				*ft_argparser(int ac, char **av, t_dirs **dirs, int *flags);
 void				ft_flagsetter(int *flags, char *str);
 
 void				ft_listprinter(t_file *head, int flags, char *path);
-void				ft_linksprinter(t_file *scanner, t_file **head);
-void				ft_sizeprinter(t_file *scanner, t_file **head);
+void	ft_printiterator(t_file **scanner, int flags, char *path, int *padding);
+void				ft_longprinter(t_file *scanner, char *path, int *padding);
+void				ft_linksprinter(t_file *scanner, int *padding);
+void				ft_useridprinter(t_file *scanner, int *padding);
+void				ft_groupidprinter(t_file *scanner, int *padding);
+void				ft_sizeprinter(t_file *scanner, int *padding);
 void				ft_dayprinter(t_file *scanner);
 
 t_dirs				*ft_adddir(char *path, t_dirs *dirs);

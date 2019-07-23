@@ -6,7 +6,7 @@
 #    By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2019/06/05 11:36:38 by rhutchin          #+#    #+#              #
-#    Updated: 2019/07/23 09:41:48 by rhutchin         ###   ########.fr        #
+#    Updated: 2019/07/23 13:13:52 by rhutchin         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -15,7 +15,7 @@ NAME =	ft_ls
 SRC =	ft_argumentparsing.c ft_conversions.c ft_dirfunctions.c \
 		ft_errorprinting.c ft_listfunctions.c ft_printer.c ft_lsengine.c \
 		ft_readandbuild.c ft_sorters.c ft_printerformatting.c ft_ls.c \
-		ft_timesorters.c
+		ft_timesorters.c ft_norm.c
 
 DIR_O = obj
 DIR_S = srcs
