@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/24 11:20:41 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/24 12:19:54 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -105,7 +105,7 @@ void			ft_listprinter(t_file *head, int flags, char *path)
 	padding = ft_padding(&head);
 	i = ft_blockcounter(&head);
 	scanner = head;
-	if ((flags & FLAG_L) && i != 0 && head->attributes[0] == 'd')
+	if ((flags & FLAG_L) && i && scanner->next)
 	{
 		ft_putstr("total ");
 		ft_putnbr(i);
