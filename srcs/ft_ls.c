@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/01 09:11:50 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/24 08:21:47 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/24 09:53:59 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -35,6 +35,8 @@ static void	ft_dirsengine(t_dirs **scanner, int flags)
 			ft_lserror(2, (*scanner)->dirname);
 			errno = 0;
 		}
+		if ((*scanner)->next)
+			ft_putchar('\n');
 		*scanner = (*scanner)->next;
 	}
 }
