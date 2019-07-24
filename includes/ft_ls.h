@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/06/05 10:44:13 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 15:15:21 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/24 07:55:03 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,8 +65,9 @@ void				ft_flagsetter(int *flags, char *str);
 
 void				ft_listprinter(t_file *head, int flags, char *path);
 void				ft_printiterator(t_file **scanner, int flags, char *path, \
-																size_t *padding);
-void				ft_longprinter(t_file *scanner, char *path, size_t *padding);
+															size_t *padding);
+void				ft_longprinter(t_file *scanner, char *path,\
+															size_t *padding);
 void				ft_linksprinter(t_file *scanner, size_t *padding);
 void				ft_useridprinter(t_file *scanner, size_t *padding);
 void				ft_groupidprinter(t_file *scanner, size_t *padding);

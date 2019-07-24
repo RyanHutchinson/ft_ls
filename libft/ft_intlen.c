@@ -6,15 +6,15 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/17 15:29:37 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 15:03:29 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/24 08:18:58 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-size_t	ft_intlen(long int num)
+int	ft_intlen(int num)
 {
-	size_t	i;
+	int	i;
 
 	i = 0;
 	if (num < 0)

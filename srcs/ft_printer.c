@@ -6,7 +6,7 @@
 /*   By: rhutchin <rhutchin@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2019/07/02 14:16:47 by rhutchin          #+#    #+#             */
-/*   Updated: 2019/07/23 15:12:28 by rhutchin         ###   ########.fr       */
+/*   Updated: 2019/07/24 08:24:57 by rhutchin         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,9 +26,9 @@ static size_t	*ft_padding(t_file **head)
 	scanner = *head;
 	while (scanner != NULL)
 	{
-		if (padding[0] < ft_intlen(scanner->links))
+		if ((int)padding[0] < ft_intlen(scanner->links))
 			padding[0] = ft_intlen(scanner->links);
-		if (padding[1] < ft_intlen(scanner->size))
+		if ((int)padding[1] < ft_intlen(scanner->size))
 			padding[1] = ft_intlen(scanner->size);
 		if (padding[2] < ft_strlen(scanner->userid))
 			padding[2] = ft_strlen(scanner->userid);
